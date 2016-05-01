@@ -65,11 +65,9 @@ def get_positive_images():
     for image_crop in image_crops:
         print i
         cropped_image = image_crop.crop_image()
-        out_image = color.rgb2gray(cropped_image)
-        out_image = rescale_intensity(out_image, out_range=(0, 255))
-        image_name = "pos" + str(i) + ".pgm"
+        image_name = "pos" + str(i) + ".ppm"
         image_path = os.path.join(pos_img_path, image_name)
-        cv2.imwrite(image_path, out_image)
+        cv2.imwrite(image_path, cropped_image)
         i += 1
 
 
@@ -92,12 +90,10 @@ def get_negative_images():
     for image_crop in image_crops:
         print i
         cropped_image = image_crop.crop_image()
-        out_image = color.rgb2gray(cropped_image)
-        out_image = rescale_intensity(out_image, out_range=(0, 255))
-        image_name = "neg" + str(i) + ".pgm"
+        image_name = "neg" + str(i) + ".ppm"
         image_path = os.path.join(neg_img_path, image_name)
-        cv2.imwrite(image_path, out_image)
+        cv2.imwrite(image_path, cropped_image)
         i += 1
 
-# get_positive_images()
-# get_negative_images()
+get_positive_images()
+get_negative_images()

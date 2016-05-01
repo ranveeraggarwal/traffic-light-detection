@@ -1,6 +1,7 @@
 import glob
 import os
 
+import cv2
 from skimage.feature import hog
 from skimage.io import imread
 from sklearn.externals import joblib
@@ -26,6 +27,8 @@ def extract_features():
     progress = 0.0
     for im_path in glob.glob(os.path.join(pos_img_path, "*")):
         im = imread(im_path)
+        im_ycbcr = cv2.cvtColor(im, cv2.COLOR_RGB2YCR_CB)
+        im = cv2.split(im_ycbcr)[0]
         feature_vector = hog(image=im, orientations=9, pixels_per_cell=(8, 8), cells_per_block=(3, 3), visualise=False)
         feature_name = os.path.split(im_path)[1].split(".")[0] + ".feat"
         feature_path = os.path.join(pos_feat_path, feature_name)
@@ -37,6 +40,8 @@ def extract_features():
     progress = 0.0
     for im_path in glob.glob(os.path.join(neg_img_path, "*")):
         im = imread(im_path)
+        im_ycbcr = cv2.cvtColor(im, cv2.COLOR_RGB2YCR_CB)
+        im = cv2.split(im_ycbcr)[0]
         feature_vector = hog(image=im, orientations=9, pixels_per_cell=(8, 8), cells_per_block=(3, 3), visualise=False)
         feature_name = os.path.split(im_path)[1].split(".")[0] + ".feat"
         feature_path = os.path.join(neg_feat_path, feature_name)

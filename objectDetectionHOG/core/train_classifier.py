@@ -19,6 +19,7 @@ def train_classifier():
 
     for feat_path in glob.glob(os.path.join(pos_feat_path, "*.feat")):
         fd = joblib.load(feat_path)
+        print len(fd)
         if len(fd):
             fd = fd.astype(numpy.object)
             feature_vectors.append(fd)
@@ -26,6 +27,7 @@ def train_classifier():
 
     for feat_path in glob.glob(os.path.join(neg_feat_path, "*.feat")):
         fd = joblib.load(feat_path)
+        print len(fd)
         if len(fd):
             fd = fd.astype(numpy.object)
             feature_vectors.append(fd)
