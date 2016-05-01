@@ -12,7 +12,7 @@ Traffic Light Detection
 * Install Python2
 * Run 
 
-	pip install -r requirements.txt
+		pip install -r requirements.txt
 
 * Install MATLAB >= 2014a
 
